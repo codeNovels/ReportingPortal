@@ -1,0 +1,62 @@
+﻿<!--NEW REPORT FORM-->
+<div id="newReportBtn">
+    <button id="newReport" class="btn btn-primary btn-lg" ng-click="isCollapsed = !isCollapsed">
+        <i class="glyphicon glyphicon-list"></i>   New Report
+    </button>
+    <hr>
+    <div collapse="isCollapsed">
+
+        <!--TITLE FIELD-->
+        <div class="row">
+            <div class="form-group col-lg-2">
+                <b>Title</b>
+                <fieldset>
+                    <input type="text" id="sreport" class="form-control" ng-model="title" required />
+                </fieldset>
+            </div>
+            <!--LINK FIELD-->
+            <div class="form-group col-lg-4">
+                <b>Link</b>
+                <fieldset>
+                    <input type="text" id="sreport" class="form-control" ng-model="link" required />
+                </fieldset>
+            </div>
+        </div>
+        <!--DESCRIPTION FIELD-->
+        <div class="row" style="margin-bottom:-20px;display:inline-block">
+            <fieldset class="form-group col-lg-6">
+                <b>Description</b>
+            </fieldset>
+        </div>
+        <div class="row">
+            <fieldset class="form-group col-lg-6">
+                <textarea type="text" class="form-control" ng-model="description" required></textarea>
+            </fieldset>
+        </div>
+
+        <!--CategORY FIELD-->
+        <div class="row">
+            <div class="input-group col-lg-6" style="margin-left:15px; padding-right:30px">
+                <b>Category </b>
+                <div class="btn-group" dropdown dropdown-append-to-body>
+                    <button type="button" class="btn dropdown-toggle" dropdown-toggle>
+                        {{formCategory}} <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu">
+                        <li ng-repeat="dropdown in sideNavCategories"><input type="radio" name="radAnswer" ng-click="setFormCategory(dropdown)" required> {{dropdown}}</li>
+                    </ul>
+                </div>
+
+                <!--SUBMIT AND CANCEL BUTTON-->
+                <fieldset class="form-group col-lg-2 pull-right" style="padding-left:20px">
+                    <input type="submit" class="btn btn-primary col-lg-12" value="submit" ng-click="addNewItem(); isCollapsed = !isCollapsed;" />
+                </fieldset>
+                <fieldset class="form-group col-lg-1 pull-right">
+                    <input type="submit" class="btn btn-primary" value="cancel" ng-click="isCollapsed = !isCollapsed" />
+                </fieldset>
+
+            </div>
+        </div>
+        <br />
+    </div>
+</div>
