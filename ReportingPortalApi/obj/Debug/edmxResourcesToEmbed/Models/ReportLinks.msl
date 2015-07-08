@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="NeriumDWModelStoreContainer" CdmEntityContainer="NeriumDWEntities">
+    <EntitySetMapping Name="ReportingLinks">
+      <EntityTypeMapping TypeName="NeriumDWModel.ReportingLink">
+        <MappingFragment StoreEntitySet="ReportingLink">
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="LinkId" ColumnName="LinkId" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="Link" ColumnName="Link" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="RowInsertedDT" ColumnName="RowInsertedDT" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Categories">
+      <EntityTypeMapping TypeName="NeriumDWModel.Category">
+        <MappingFragment StoreEntitySet="Category">
+          <ScalarProperty Name="Category1" ColumnName="Category" />
+          <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="LinkCategory" TypeName="NeriumDWModel.LinkCategory" StoreEntitySet="LinkCategory">
+      <EndProperty Name="ReportingLink">
+        <ScalarProperty Name="LinkId" ColumnName="LinkId" />
+      </EndProperty>
+      <EndProperty Name="Category">
+        <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping>

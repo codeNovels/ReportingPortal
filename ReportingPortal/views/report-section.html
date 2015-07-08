@@ -1,0 +1,45 @@
+﻿<!--REPORT LIST BODY-->
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title col-lg-11"><i class="fa fa-bar-chart-o fa-fw"></i> Report List</h3>
+                <br />
+            </div>
+            <div class="panel-body">
+                <div class="panel">
+                    <table class="table table-striped">
+                        <tbody>
+                            <tr ng-repeat="report in reportList | filter: search | orderBy:'LinkId' | filter: filterCategory" ng-if="report.IsActive==filterArchive">
+                                <td>
+                                    <b>{{report.Title}} {{report.IsActive}}</b>
+                                    <br><small>
+                                        <a ng-href="#" ng-click="openTab(report.Link)">{{report.Link}}</a>
+                                        <span class="pull-right">
+                                            <span id="trashtext">Delete</span>
+                                            <button class="trash custom-appearance pull-right" style="margin-right:-9px" ng-click="deleteLink($index, report.LinkId)">
+                                                <span class="lid"></span>
+                                                <span class="can"></span>
+                                            </button>
+                                        </span>
+
+                                    </small>
+                                    <br><small>{{report.Description}}</small> <label for="active-{{report.LinkId}}" style="font-weight:normal;" class="pull-right"><small>IsActive </small> <input type="checkbox" ng-model="report.IsActive" ng-change="activateItem(report)" id="active-{{report.LinkId}}" /></label>
+                                    <br><small ng-repeat="category in report.Categories">{{category.Category1}}</small>
+                                </td>
+
+
+
+
+
+                                <br />
+
+
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

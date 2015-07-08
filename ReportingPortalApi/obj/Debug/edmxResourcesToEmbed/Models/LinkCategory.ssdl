@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="NeriumDWModel1.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="LinkCategory">
+    <Key>
+      <PropertyRef Name="LinkId" />
+      <PropertyRef Name="CategoryId" />
+    </Key>
+    <Property Name="LinkId" Type="int" Nullable="false" />
+    <Property Name="CategoryId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityContainer Name="NeriumDWModel1StoreContainer">
+    <EntitySet Name="LinkCategory" EntityType="Self.LinkCategory" Schema="portal" store:Type="Tables" />
+  </EntityContainer>
+</Schema>

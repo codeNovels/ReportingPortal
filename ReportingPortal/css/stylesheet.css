@@ -1,0 +1,109 @@
+﻿#newReport {
+    background-color: #098cc8;
+    color: #fff;
+    border: 1px solid transparent;
+    box-shadow: 0 0 rgba(0,0,0,0);
+    border-radius: 2px;
+    -webkit-transition: background-color .2s,box-shadow .2s,background-color .2s,border-color .2s,color .2s;
+    transition: background-color .2s,box-shadow .2s,background-color .2s,border-color .2s,color .2s;
+    background-image: -webkit-linear-gradient(top,#0f9ada,#0076ad);
+    background-image: linear-gradient(to bottom,#0f9ada,#0076ad);
+    border: 0;
+    box-shadow: 0 1px 1px rgba(0,0,0,0.3),0 0 0 1px rgba(255,255,255,0.15) inset;
+}
+
+#trashtext {
+    margin-left:-35px
+}
+
+#newReport:hover {
+    background-color:#21b0f1;
+    background-image:-webkit-linear-gradient(top,#37c0ff,#0097dd);
+    background-image:linear-gradient(to bottom,#37c0ff,#0097dd);
+    color:#fff;border-color:transparent;
+    box-shadow:0 0 rgba(0,0,0,0);
+}
+
+#searchBar {
+    display:inline-block;
+    float:right;max-height:20px;
+    margin-top:-10px
+}
+
+#newReportBtn {
+    padding-top:20px;
+}
+
+#sreport.ng-invalid.ng-touched {
+    background-color: #FA787E;
+  }
+
+#sreport.ng-valid.ng-touched {
+    background-color: #78FA89;
+  }
+  
+textarea.ng-invalid.ng-touched {
+    background-color: #FA787E;
+  }
+
+textarea.ng-valid.ng-touched {
+    background-color: #78FA89;
+  }
+
+
+/* trashcan animation*/
+.trash {
+  -webkit-appearance: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: inline-block;
+  outline: none;
+  padding: 0;
+  position: relative;
+  width: 30px;
+}
+
+.trash > span {
+  display: inline-block;
+}
+
+.trash > .can,
+.trash > .lid {
+  background: url(/images/trash.png) 0 0 no-repeat;
+  left: 8px;
+  position: absolute;
+  right: 8px;
+  top: 2px;
+}
+
+.trash > .lid {
+  -webkit-transform-origin: -7% 100%;
+  -webkit-transition: -webkit-transform 150ms;
+  height: 6px;
+  width: 14px;
+}
+
+html[dir='rtl'] .trash > .lid {
+  -webkit-transform-origin: 107% 100%;
+}
+
+.trash:-webkit-any(:focus, :hover, .open) > .lid {
+  -webkit-transform: rotate(-45deg);
+  -webkit-transition: -webkit-transform 250ms;
+}
+
+html[dir='rtl'] .trash:-webkit-any(:focus, :hover, .open) > .lid {
+  -webkit-transform: rotate(45deg);
+}
+
+.trash > .can {
+  background-position: -1px -4px;
+  height: 12px;
+  /* The margins match the background position offsets. */
+  margin-left: 1px;
+  /* The right margin is one greater due to a shadow on the trash image. */
+  margin-right: 2px;
+  margin-top: 4px;
+  width: 11px;
+}

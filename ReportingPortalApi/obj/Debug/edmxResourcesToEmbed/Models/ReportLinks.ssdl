@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="NeriumDWModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Category">
+    <Key>
+      <PropertyRef Name="CategoryId" />
+    </Key>
+    <Property Name="CategoryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Category" Type="nchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <EntityType Name="LinkCategory">
+    <Key>
+      <PropertyRef Name="LinkId" />
+      <PropertyRef Name="CategoryId" />
+    </Key>
+    <Property Name="LinkId" Type="int" Nullable="false" />
+    <Property Name="CategoryId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ReportingLink">
+    <Key>
+      <PropertyRef Name="LinkId" />
+    </Key>
+    <Property Name="LinkId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Title" Type="nvarchar" MaxLength="500" Nullable="false" />
+    <Property Name="Link" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="Description" Type="nvarchar" MaxLength="1000" />
+    <Property Name="RowInsertedDT" Type="datetime2" Precision="7" Nullable="false" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_LinkCategory_Category">
+    <End Role="Category" Type="Self.Category" Multiplicity="1" />
+    <End Role="LinkCategory" Type="Self.LinkCategory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Category">
+        <PropertyRef Name="CategoryId" />
+      </Principal>
+      <Dependent Role="LinkCategory">
+        <PropertyRef Name="CategoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_LinkCategory_ReportingLink">
+    <End Role="ReportingLink" Type="Self.ReportingLink" Multiplicity="1" />
+    <End Role="LinkCategory" Type="Self.LinkCategory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ReportingLink">
+        <PropertyRef Name="LinkId" />
+      </Principal>
+      <Dependent Role="LinkCategory">
+        <PropertyRef Name="LinkId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="NeriumDWModelStoreContainer">
+    <EntitySet Name="Category" EntityType="Self.Category" Schema="portal" store:Type="Tables" />
+    <EntitySet Name="LinkCategory" EntityType="Self.LinkCategory" Schema="portal" store:Type="Tables" />
+    <EntitySet Name="ReportingLink" EntityType="Self.ReportingLink" Schema="portal" store:Type="Tables" />
+    <AssociationSet Name="FK_LinkCategory_Category" Association="Self.FK_LinkCategory_Category">
+      <End Role="Category" EntitySet="Category" />
+      <End Role="LinkCategory" EntitySet="LinkCategory" />
+    </AssociationSet>
+    <AssociationSet Name="FK_LinkCategory_ReportingLink" Association="Self.FK_LinkCategory_ReportingLink">
+      <End Role="ReportingLink" EntitySet="ReportingLink" />
+      <End Role="LinkCategory" EntitySet="LinkCategory" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

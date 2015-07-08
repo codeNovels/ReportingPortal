@@ -1,0 +1,65 @@
+﻿<!--NEW REPORT FORM-->
+<div id="newReportBtn" style="min-height:75px">
+    <div ng-if="isAdmin(username)">
+        <button id="newReport" class="btn btn-primary btn-lg" ng-click="isCollapsed = !isCollapsed" style="margin-top:5px">
+            </i>   New Report
+        </button>
+        <img src="../images/spinner.gif" style="height: 30px; margin-left:540px" ng-if="spinner=='true'" />
+        <div collapse="isCollapsed">
+
+            <!--TITLE FIELD-->
+            <div class="row">
+                <div class="form-group col-lg-2">
+                    <b>Title</b>
+                    <fieldset>
+                        <input type="text" id="sreport" class="form-control" ng-model="title" required />
+                    </fieldset>
+                </div>
+                <!--LINK FIELD-->
+                <div class="form-group col-lg-4">
+                    <b>Link</b>
+                    <fieldset>
+                        <input type="text" id="sreport" class="form-control" ng-model="link" required />
+                    </fieldset>
+                </div>
+            </div>
+            <!--DESCRIPTION FIELD-->
+            <div class="row" style="margin-bottom:-20px;display:inline-block">
+                <fieldset class="form-group col-lg-6">
+                    <b>Description</b>
+                </fieldset>
+            </div>
+            <div class="row">
+                <fieldset class="form-group col-lg-6">
+                    <textarea type="text" class="form-control" ng-model="description" required></textarea>
+                </fieldset>
+            </div>
+
+            <!--CategORY FIELD-->
+            <div class="row">
+                <div class="input-group col-lg-6" style="margin-left:15px; padding-right:30px">
+                    <b>Categories </b>
+                    <div class="btn-group btn-group-justified" role="group">
+                        <div class="btn-group" ng-repeat="category in sideNavCategory | limitTo:5">
+                            <label class="btn btn-default"><input type="checkbox" ng-model="category.selected" />{{category.Category1}}</label>
+                        </div>
+                    </div>
+                    <div class="btn-group btn-group-justified" role="group">
+                        <div class="btn-group" ng-repeat="category in sideNavCategory | limitTo:-5">
+                            <label class="btn btn-default"><input type="checkbox" ng-model="category.selected" />{{category.Category1}}</label>
+                        </div>
+                    </div>
+                </div>
+                <br />
+            </div>
+            <div class="row">
+                <!--SUBMIT AND CANCEL BUTTON-->
+                <fieldset class="form-group col-lg-2">
+                    <input type="submit" class="btn btn-primary col-lg-12" value="submit" ng-click="addNewItem(); isCollapsed = !isCollapsed;" />
+                </fieldset>
+                <fieldset class="form-group col-lg-1">
+                    <input type="submit" class="btn btn-primary col-lg-12" value="cancel" ng-click="isCollapsed = !isCollapsed" />
+                </fieldset>
+            </div>
+        </div>
+    </div>

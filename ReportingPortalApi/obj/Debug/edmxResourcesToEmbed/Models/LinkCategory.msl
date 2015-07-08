@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="NeriumDWModel1StoreContainer" CdmEntityContainer="NeriumDWEntities2">
+    <EntitySetMapping Name="LinkCategories">
+      <EntityTypeMapping TypeName="NeriumDWModel1.LinkCategory">
+        <MappingFragment StoreEntitySet="LinkCategory">
+          <ScalarProperty Name="LinkId" ColumnName="LinkId" />
+          <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
