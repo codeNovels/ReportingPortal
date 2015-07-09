@@ -20,11 +20,11 @@
 <br />Virtual Directory
 </small>
  
-<b>Website </b>
+<b>*** Website *** </b>
 ![Picture](https://github.com/codeNovels/ReportingPortal/blob/master/pic1.PNG)
 
-<b>Form</b>
+<b>*** Form ***</b>
 ![Picture](https://github.com/codeNovels/ReportingPortal/blob/master/pic2.PNG)
 
-<b>SQL Database</b>
+<b>*** SQL Database ***</b>
 ![Picture](https://github.com/codeNovels/ReportingPortal/blob/master/pic3.PNG)
