@@ -8,7 +8,7 @@
 </small>
 
 <b>Back-End:</b>
-<small>
+<small> 
 <br />Entity Framework
 <br />Asp.NET WebApi 
 <br />Active Directory Authentication
