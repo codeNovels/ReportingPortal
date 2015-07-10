@@ -1,62 +1,23 @@
-﻿var app = angular.module("app", ['mockData', 'ui.bootstrap']);
-
-app.factory('reportLinkService', ['$http', function ($http) {
-    var urlBase = '/ReportingPortalApi/api/reportlinks/';
-    var reportLinkService = {};
-    //GET
-    reportLinkService.getReportLinks = function () {
-        return $http.get(urlBase);
-    };
-    //POST
-    reportLinkService.postReportLinks = function (newReport) {
-        return $http.post(urlBase, newReport);
-    };
-    //UPDATE
-    reportLinkService.updateReportLinks = function (id, update) {
-        return $http.put(urlBase+id, update);
-    };
-    //DELETE
-    reportLinkService.deleteReportLinks = function (id) {
-        return $http.delete(urlBase + id);
-    };
-    return reportLinkService;
-}]);
-
-app.factory('linkCategoryService', ['$http', function ($http) {
-    var urlBase = 'ReportingPortalApi/api/linkcategory/';
-    var linkCategoryService = {};
-    //GET
-    linkCategoryService.getReportToCategory = function () {
-        return $http.post(urlBase);
-    };
-    //POST
-    linkCategoryService.postReportToCategory = function (object) {
-        return $http.post(urlBase, object);
-    };
-    //DELETE
-    linkCategoryService.deleteReportToCategory = function (id) {
-        return $http.delete(urlBase + id);
-    };
-
-    return linkCategoryService;
-}]);
-
-app.factory('usernameService', ['$http', function ($http) {
-    var urlBase = '/ReportingPortalApi/api/identity/';
-    var usernameService = {};
-    usernameService.getUsername = function () {
-        return $http.get(urlBase);
-    };
-    return usernameService;
-}]);
+﻿var app = angular.module("app", ['ui.bootstrap']);
 
 //<!--SideNav + SubmitForm Controller-->
-app.controller("bodyCtrl", ['$scope', 'reportLinkService', 'usernameService', '$window', '$http', 'linkCategoryService', function ($scope, reportLinkService, usernameService, $window, $http, linkCategoryService) {
+angular
+    .module('app')
+    .controller("bodyCtrl", bodyCtrl);
+
+bodyCtrl.$inject = ['$scope', 'reportLinkService', 'usernameService', '$window', '$http', 'linkCategoryService'];
+
+function bodyCtrl($scope, reportLinkService, usernameService, $window, $http, linkCategoryService) {
+    
+    //New Report Button Collapse/Expand//
+    $scope.isCollapsed = true;
+    //AJAX loading spinner
     $scope.spinner = 'true';
+    //reports archive checkbox
     $scope.filterArchive = true;
 
 
-    //Categories
+    //GET sideNavCategories
     var categories = function (response) {
         $scope.sideNavCategory = response.data;
     };
@@ -66,7 +27,7 @@ app.controller("bodyCtrl", ['$scope', 'reportLinkService', 'usernameService', '$
     };
     $scope.sideNavCategory2();
 
-
+    //Assign sideNavCategories into form
     function getReportToCategory() {
         linkCategoryService.getReportToCategory()
             .success(function (reportToCategory) {
@@ -77,22 +38,6 @@ app.controller("bodyCtrl", ['$scope', 'reportLinkService', 'usernameService', '$
         })
     };
 
-
-
-    //<!--New Report Button Collapse/Expand Controller-->//
-    $scope.isCollapsed = true;
-
-    //GET USERNAME
-    getUsername();
-    function getUsername() {
-        usernameService.getUsername()
-            .success(function (username) {
-                $scope.username = username;
-            })
-        .error(function (error) {
-            $scope.status = 'Unable to load customer data: ' + error.message;
-        })
-    }
     //GET REPORTSLIST
     getReportLinks();
     function getReportLinks() {
@@ -104,7 +49,7 @@ app.controller("bodyCtrl", ['$scope', 'reportLinkService', 'usernameService', '$
             $scope.status = 'Unable to load customer data: ' + error.message;
         })
     };
-    //POST
+    //POST REPORT
     $scope.addNewItem = function () {
         $scope.spinner = 'true';
         reportLinkService.postReportLinks({ Title: this.title, Link: this.link, Description: this.description, IsActive: true })
@@ -125,7 +70,7 @@ app.controller("bodyCtrl", ['$scope', 'reportLinkService', 'usernameService', '$
             $scope.spinner = 'false';
         }
     });
-    //UPDATE
+    //UPDATE IsActive checkbox
     $scope.activateItem = function (report) {
         reportLinkService.updateReportLinks(report.LinkId, { LinkId: report.LinkId, Title: report.Title, Link: report.Link, Description: report.Description, IsActive: report.IsActive })
             .success(function () {
@@ -136,10 +81,7 @@ app.controller("bodyCtrl", ['$scope', 'reportLinkService', 'usernameService', '$
             })
     };
 
-    
-
-
-    //DELETE
+    //DELETE report
     $scope.deleteLink = function (index, LinkId) {
         $scope.spinner = 'true';
         reportLinkService.deleteReportLinks(LinkId)
@@ -153,6 +95,40 @@ app.controller("bodyCtrl", ['$scope', 'reportLinkService', 'usernameService', '$
             })
     };
 
+
+
+    //openTab
+    $scope.openTab = function (url) {
+        $window.open('http://' + url);
+    }
+    //default category and form category selection
+    $scope.formCategory = 'Analytics';
+    $scope.setFormCategory = function (category) {
+        $scope.formCategory = category;
+    }
+    //filtering the sideNav by categories
+    $scope.filterCategory = '';
+    $scope.chooseCategory = function (category) {
+        $scope.filterCategory = category;
+        $scope.filterArchive = true;
+    }
+    //filter the unchecked marked items in report list   
+    $scope.showArchive = function () {
+        $scope.filterCategory = '';
+        $scope.filterArchive = false;
+    }
+
+    //GET USERNAME
+    getUsername();
+    function getUsername() {
+        usernameService.getUsername()
+            .success(function (username) {
+                $scope.username = username;
+            })
+        .error(function (error) {
+            $scope.status = 'Unable to load customer data: ' + error.message;
+        })
+    }
     //validate username is admin
     $scope.isAdmin = function (name) {
         switch (name) {
@@ -188,27 +164,7 @@ app.controller("bodyCtrl", ['$scope', 'reportLinkService', 'usernameService', '$
         }
     }
 
-    //openTab
-    $scope.openTab = function (url) {
-        $window.open('http://' + url);
-    }
-    //default category and form category selection
-    $scope.formCategory = 'Analytics';
-    $scope.setFormCategory = function (category) {
-        $scope.formCategory = category;
-    }
-    //filtering the sideNav by categories
-    $scope.filterCategory = '';
-    $scope.chooseCategory = function (category) {
-        $scope.filterCategory = category;
-        $scope.filterArchive = true;
-    }
-    //filter the unchecked marked items in report list   
-    $scope.showArchive = function () {
-        $scope.filterCategory = '';
-        $scope.filterArchive = false;
-    }
-}]);
+};
 
 
 
