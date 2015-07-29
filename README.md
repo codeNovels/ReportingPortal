@@ -6,7 +6,7 @@
 <br />Full CRUD capabilities POST GET PUT DELETE via $http
 <br />Multiple categories in POST via .forEach function
 </small>
-
+ 
 <b>Back-End:</b>
 <small> 
 <br />Entity Framework
